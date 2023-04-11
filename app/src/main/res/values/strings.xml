@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LifestyleApp</string>
+    <string name="activity_level">Activity Level</string>
+    <string name="sex">Sex</string>
+    <string name="height">Height (inches)</string>
+    <string name="location">Location</string>
+    <string name="age">Age</string>
+    <string name="name">Name</string>
+    <string name="submit">Submit</string>
+    <string name="weight">Weight</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select">Select Item</string>
+    <string name="first_and_last">First and Last</string>
+    <string name="weather">Weather</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="hikes_nearby">Hiking</string>
+    <string name="daily_goals">Goals</string>
+    <string name="profile">Profile</string>
+    <string name="daily_calories">Daily Calories</string>
+    <string name="tv_activity_level">Activity Level</string>
+    <string name="sex_label">Sex</string>
+    <string name="location_label">Location</string>
+    <string name="age_label">Age</string>
+
+    <string name="weight_data">%1$d lbs</string>
+
+    <string-array name="activities">
+        <item>Sedentary</item>
+        <item>Lightly Active</item>
+        <item>Moderately Active</item>
+        <item>Very Active</item>
+    </string-array>
+
+    <string-array name="sexes">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Intersex</item>
+    </string-array>
+
+    <string-array name="us_states">
+        <item> AL, Alabama</item>
+        <item> AK, Alaska</item>
+        <item> AZ, Arizona</item>
+        <item> AR, Arkansas</item>
+        <item> CA, California</item>
+        <item> CO, Colorado</item>
+        <item> CT, Connecticut</item>
+        <item> DE, Delaware</item>
+        <item> DC, District Of Columbia</item>
+        <item> FL, Florida</item>
+        <item> GA, Georgia</item>
+        <item> HI, Hawaii</item>
+        <item> ID, Idaho</item>
+        <item> IL, Illinois</item>
+        <item> IN, Indiana</item>
+        <item> IA, Iowa</item>
+        <item> KS, Kansas</item>
+        <item> KY, Kentucky</item>
+        <item> LA, Louisiana</item>
+        <item> ME, Maine</item>
+        <item> MD, Maryland</item>
+        <item> MA, Massachusetts</item>
+        <item> MI, Michigan</item>
+        <item> MN, Minnesota</item>
+        <item> MS, Mississippi</item>
+        <item> MO, Missouri</item>
+        <item> MT, Montana</item>
+        <item> NE, Nebraska</item>
+        <item> NV, Nevada</item>
+        <item> NH, New Hampshire</item>
+        <item> NJ, New Jersey</item>
+        <item> NM, New Mexico</item>
+        <item> NY, New York</item>
+        <item> NC, North Carolina</item>
+        <item> ND, North Dakota</item>
+        <item> OH, Ohio</item>
+        <item> OK, Oklahoma</item>
+        <item> OR, Oregon</item>
+        <item> PA, Pennsylvania</item>
+        <item> PR, Puerto Rico</item>
+        <item> RI, Rhode Island</item>
+        <item> SC, South Carolina</item>
+        <item> SD, South Dakota</item>
+        <item> TN, Tennessee</item>
+        <item> TX, Texas</item>
+        <item> UT, Utah</item>
+        <item> VT, Vermont</item>
+        <item> VI, Virgin Islands</item>
+        <item> VA, Virginia</item>
+        <item> WA, Washington</item>
+        <item> WV, West Virginia</item>
+        <item> WI, Wisconsin</item>
+        <item> WY, Wyoming</item>
+    </string-array>
+
+</resources>

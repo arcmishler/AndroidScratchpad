@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--    MY THEME-->
+    <color name="purple_light">#f6f5ff</color>
+    <color name="purple_dark">#412B5C</color>
+    <color name="purple_dull">#291B50</color>
+    <color name="purple_dull_light">#CDBEFF</color>
+    <color name="darkMaroon">#2b1822</color>
+    <color name="purple_mid">#9D56FF</color>
+    <color name="orange">#ff8c27</color>
+    <color name="orange_yellow">#FFA827</color>
+    <color name="light_yellow">#fffdf8</color>
+    <color name="mid_yellow">#ffd500</color>
+    <color name="dark_yellow">#f0ac00</color>
+    <color name="fade_teal">#B068A19C</color>
+    <color name="dark_teal">#005353</color>
+    <color name="mid_teal">#AB8DDFC5</color>
+    <color name="dark_peach">#f28c82</color>
+    <color name="mid_peach">#ffbdb2</color>
+    <color name="light_peach">#FFD4CC</color>
+    <color name="cream_white">#FFF3ED</color>
+    <color name="midMint">#87dbaf</color>
+    <color name="lightMint">#F5FAFF</color>
+    <color name="darkMint">#56a980</color>
+    <color name="bright_orange">#FFFF7C52</color>
+    <color name="light_orange">#FFDDD2</color>
+    <color name="mtrl_textinput_default_box_stroke_color">#8240F5</color>
+</resources>
