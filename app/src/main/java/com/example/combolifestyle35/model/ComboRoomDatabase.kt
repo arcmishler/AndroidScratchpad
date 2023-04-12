@@ -1,48 +1,56 @@
 package com.example.combolifestyle35.model
 
+import android.content.Context
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import kotlin.jvm.Volatile
+import androidx.room.Room
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.combolifestyle35.di.ApplicationScope
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-import javax.inject.Provider
 
 
 @Database(entities = [UserTable::class], version = 1, exportSchema = false)
 abstract class ComboRoomDatabase : RoomDatabase() {
     abstract fun comboDao(): ComboDao
 
-        class Callback @Inject constructor(
-            private val database: Provider<ComboRoomDatabase>,
-            @ApplicationScope private val applicationScope: CoroutineScope
-        ) : RoomDatabase.Callback() {
+    // Make the database singleton. Could in theory
+    companion object {
+        @Volatile
+        private var mInstance: ComboRoomDatabase? = null
+        fun getDatabase(
+            context: Context,
+            scope : CoroutineScope
+        ): ComboRoomDatabase {
+            return mInstance ?: synchronized(this){
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    ComboRoomDatabase::class.java, "comboApp.db"
+                )
+                    .addCallback(RoomDatabaseCallback(scope))
+                    .fallbackToDestructiveMigration()
+                    .build()
+                mInstance = instance
+                instance
+            }
+        }
+
+        private class RoomDatabaseCallback(
+            private val scope: CoroutineScope
+        ): RoomDatabase.Callback() {
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
-
-                val dao = database.get().comboDao()
-
-                applicationScope.launch {
-                    dao.insert(UserTable("Dummy_name", "Dummy_data"))
+                mInstance?.let { database ->
+                    scope.launch(Dispatchers.IO){
+                        populateDbTask(database.comboDao())
+                    }
                 }
             }
         }
-//        private class RoomDatabaseCallback(
-//            private val scope: CoroutineScope
-//        ): RoomDatabase.Callback() {
-//            override fun onCreate(db: SupportSQLiteDatabase) {
-//                super.onCreate(db)
-//                mInstance?.let { database ->
-//                    scope.launch(Dispatchers.IO){
-//                        populateDbTask(database.comboDao())
-//                    }
-//                }
-//            }
-//        }
 
-//        suspend fun populateDbTask (comboDao: ComboDao) {
-//            comboDao.insert(UserTable("Dummy_name", "Dummy_data"))
-//        }
+        suspend fun populateDbTask (comboDao: ComboDao) {
+            comboDao.insert(UserTable("Dummy_name", "Dummy_data"))
+        }
     }
-//}
+}

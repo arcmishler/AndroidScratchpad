@@ -4,9 +4,9 @@ class UserData {
 
     //Setters and Getters
     var userData: UserData? = null
-    var profile = Profile()
+    var user = User()
 
-    inner class Profile {
+    inner class User {
         var name: String? = null
     }
 }

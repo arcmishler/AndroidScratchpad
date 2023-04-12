@@ -6,11 +6,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 import kotlin.jvm.Synchronized
 
 
-class UserRepository @Inject constructor(comboDao: ComboDao){
+class UserRepository private constructor(comboDao: ComboDao){
 
     // This LiveData object that is notified when we've fetched the user
     val userData = MutableLiveData<UserData>()
@@ -38,7 +37,7 @@ class UserRepository @Inject constructor(comboDao: ComboDao){
     suspend fun insert() {
         if (mName != null) {
             mComboDao.insert(UserTable(mName!!, mUser!!))
-    }
+        }
     }
 
     // Make the repository singleton (static class)

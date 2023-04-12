@@ -1,81 +1,97 @@
 package com.example.combolifestyle35.view
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import androidx.annotation.RequiresApi
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import com.example.combolifestyle35.viewmodel.ComboViewModel
 import com.example.combolifestyle35.R
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.combolifestyle35.model.UserData
+import com.example.combolifestyle35.model.UserTable
+import com.example.combolifestyle35.model.ComboApplication
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var mBtSubmit: Button? = null
     private var mRecyclerView: RecyclerView? = null
     private var mAdapter: RecyclerView.Adapter<*>? = null
+    // Initialize the view model here. One per activity.
+    // While initializing, we'll also inject the repository.
+    // However, standard view model constructor only takes a context to
+    // the activity. We'll need to define our own constructor, but this
+    // requires writing our own view model factory.
+    private val mComboViewModel: ComboViewModel by viewModels {
+        ComboViewModel.ComboViewModelFactory((application as ComboApplication).repository)
+    }
 
-    private lateinit var navController: NavController
-    private val activityName: String = " "
-
-    // Initialize the view model here. One per activity. Also inject the repository.
-//    val comboViewModel: ComboViewModel by viewModels {
-//        ComboViewModel.ComboViewModelFactory((application as ComboApplication).repository)
-//    }
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTitle(activityName)
-//        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
-//         Find the NavHostFragment using its ID
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+//        Get the edit text, all the text views, button
+//        mEtLocation = findViewById<View>(R.id.et_location) as EditText
+//        mTvTemp = findViewById<View>(R.id.tv_temp) as TextView
+//        mTvPress = findViewById<View>(R.id.tv_pressure) as TextView
+//        mTvHum = findViewById<View>(R.id.tv_humidity) as TextView
+//        mBtSubmit = findViewById<View>(R.id.button_submit) as Button
+//        mBtSubmit!!.setOnClickListener(this)
 
-        // Get the NavController from the NavHostFragment
-        navController = navHostFragment.navController
-//
-//        navigateToHomeFragment()
-//    }
-//
-////     Call this function to navigate to HomeFragment
-//    private fun navigateToHomeFragment() {
-//        // Navigate to HomeFragment
-//        navController.navigate(R.id.homeFragment)
-//    }
+        //Set the observer for the vanilla livedata object
+        mComboViewModel.userData.observe(this, liveDataObserver)
+
+        //set another observer for the flow-converted-to-livedata object
+        // cannot attach observers directly to flows, but the flow
+        // has already been converted to a livedata object
+        mComboViewModel.allUserData.observe(this, flowObserver)
+
+        //Get the recycler view.
+//        mRecyclerView = findViewById<View>(R.id.rv_Master) as RecyclerView
+
+        //Tell Android that we know the size of the recyclerview
+        //doesn't change
+//        mRecyclerView!!.setHasFixedSize(true)
+
+        //Set the layout manager
+//        val layoutManager = LinearLayoutManager(this)
+//        mRecyclerView!!.layoutManager = layoutManager
     }
 
-//    fun getDefaultViewModelProviderFactory(): ComboViewModel.ComboViewModelFactory {
-//        return ComboViewModel.ComboViewModelFactory((application as ComboApplication).repository)
-//    }
+    //create an observer that watches the LiveData<WeatherData> object
+    private val liveDataObserver: Observer<UserData> =
+        Observer { userData -> // Update the UI if this data variable changes
+            if (userData != null) {
 
-    override fun onClick(v: View?) {
+//                mTvTemp!!.text = "" + (weatherData.temperature.temp - 273.15).roundToInt() + " C"
+//                mTvHum!!.text = "" + weatherData.currentCondition.humidity + "%"
+//                mTvPress!!.text = "" + weatherData.currentCondition.pressure + " hPa"
+            }
+        }
+
+    // This observer is triggered when the Flow object in the repository
+    // detects a change to the database (including at the start of the app)
+    private val flowObserver: Observer<List<UserTable>> =
+        Observer { UserTableList ->
+            if (UserTableList != null) {
+                // Pass the entire list to a RecyclerView
+//                mRecyclerView!!.adapter = WeatherRVAdapter(weatherTableList)
+            }
+        }
+
+    override fun onClick(view: View) {
+        when (view.id) {
+            R.id.button_submit -> {
+//
+//                //Get the string from the edit text and sanitize the input
+//                val inputFromEt = mEtLocation!!.text.toString().replace(' ', '&')
+//                loadWeatherData(inputFromEt)
+            }
+        }
+    }
+
+    private fun loadUserData(name: String?) {
+        //pass the location in to the view model
+        mComboViewModel.setName(name!!)
     }
 }
-    // Set click listeners for views that need to handle clicks
-//    private fun setupClickListeners() {
-//        findViewById<Button>(R.id.button_profile).setOnClickListener(this)
-//    }
-
-//    override fun onClick(view: View) {
-//        when (view.id) {
-//            R.id.button_profile -> {
-//                // Handle button_profile click
-//                // Navigate to ProfileFragment using the action defined in nav_graph.
-//                val action = HomeFragmentDirections.actionHomeFragmentToProfileFragment()
-//                navController.navigate(action)
-//            }
-//        }
-//    }
-
-    // Call this method to load user data
-//    private fun loadUserData(name: String?) {
-//        //pass the location in to the view model
-//        comboViewModel.setName(name!!)
-//    }
-
-
