@@ -1,4 +1,4 @@
-package com.example.combolifestyle35
+package com.example.combolifestyle35.model
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow

@@ -1,12 +1,12 @@
-package com.example.combolifestyle35
+package com.example.combolifestyle35.model
 
 class UserData {
 
     //Setters and Getters
     var userData: UserData? = null
-    var user = User()
+    var profile = Profile()
 
-    inner class User {
+    inner class Profile {
         var name: String? = null
     }
 }

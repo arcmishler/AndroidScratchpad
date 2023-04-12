@@ -1,4 +1,4 @@
-package com.example.combolifestyle35
+package com.example.combolifestyle35.model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.annotation.WorkerThread
@@ -6,10 +6,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.jvm.Synchronized
 
 
-class UserRepository private constructor(comboDao: ComboDao){
+class UserRepository @Inject constructor(comboDao: ComboDao){
 
     // This LiveData object that is notified when we've fetched the user
     val userData = MutableLiveData<UserData>()
@@ -49,7 +50,7 @@ class UserRepository private constructor(comboDao: ComboDao){
                         scope: CoroutineScope
         ): UserRepository {
             mScope = scope
-            return mInstance?: synchronized(this){
+            return mInstance ?: synchronized(this){
                 val instance = UserRepository(comboDao)
                 mInstance = instance
                 instance

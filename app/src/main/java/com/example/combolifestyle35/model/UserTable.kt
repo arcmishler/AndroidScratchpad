@@ -1,4 +1,4 @@
-package com.example.combolifestyle35
+package com.example.combolifestyle35.model
 
 import androidx.room.PrimaryKey
 import androidx.room.ColumnInfo
