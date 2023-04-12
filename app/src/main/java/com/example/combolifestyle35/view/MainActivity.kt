@@ -115,8 +115,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun loadUserData(name: String?) {
-        //pass the location in to the view model
-        viewModel.setName(name!!)
-    }
+//    private fun loadUserData(name: String?) {
+//        //pass the location in to the view model
+//        viewModel.setName(name!!)
+//    }
 }

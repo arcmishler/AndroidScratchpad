@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -13,6 +14,7 @@ import com.example.combolifestyle35.viewmodel.ComboViewModel
 
 class ProfileFragment: Fragment() {
     private var buttonDone: Button? = null
+    private var nameEt: EditText? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for the Fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
@@ -29,9 +31,14 @@ class ProfileFragment: Fragment() {
 
         viewModel.navController = findNavController()
 
+        nameEt = view.findViewById(R.id.et_name) as EditText
 
         buttonDone = view.findViewById(R.id.button_done) as Button
         buttonDone!!.setOnClickListener {
+
+            val name = nameEt!!.text.toString()
+            viewModel.setName(name)
+
             viewModel.navigateToHome()
         }
         // Set up any UI interactions, event listeners, or ViewModel observers

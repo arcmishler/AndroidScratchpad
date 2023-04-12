@@ -19,27 +19,30 @@ class ComboViewModel(repository: UserRepository) : ViewModel() {
     // Singleton UserRepo
     private var mUserRepository: UserRepository = repository
 
+    // Pass user's name to repository
+//    fun setName(name: String) {
+//        mUserRepository.setName(name)
+//    }
+//
+    // Return data from LiveData obj
+    val userData: LiveData<UserData>
+        get() = jsonUserData
+
+    // ---- BASIC WORKING STUFF STARTING HERE ---
     lateinit var navController: NavController
 
+    private val _name = MutableLiveData<String>()
+    val name: LiveData<String> get() = _name
+
+    fun setName(name: String) {
+        _name.value = name
+    }
     fun navigateToHome() {
         navController.navigate(R.id.action_profileFragment_to_homeFragment)
     }
     fun navigateToProfile() {
         navController.navigate(R.id.action_homeFragment_to_profileFragment)
     }
-    // Pass user's name to repository
-    fun setName(name: String) {
-        mUserRepository.setName(name)
-    }
-
-//    // Pass activity level to repository
-//    fun setActivityLvl(actLvl: String) {
-//        mUserRepository.setActivityLvl(actLvl)
-//    }
-
-    // Return data from LiveData obj
-    val userData: LiveData<UserData>
-        get() = jsonUserData
 
     // This factory class allows us to define custom constructors for the view model
     class ComboViewModelFactory(private val repository: UserRepository) : ViewModelProvider.Factory {
