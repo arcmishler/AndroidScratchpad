@@ -1,11 +1,16 @@
 package com.example.combolifestyle35.view
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.RecyclerView
 import com.example.combolifestyle35.viewmodel.ComboViewModel
 import com.example.combolifestyle35.R
@@ -22,13 +27,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     // However, standard view model constructor only takes a context to
     // the activity. We'll need to define our own constructor, but this
     // requires writing our own view model factory.
-    private val mComboViewModel: ComboViewModel by viewModels {
+    private val viewModel: ComboViewModel by viewModels {
         ComboViewModel.ComboViewModelFactory((application as ComboApplication).repository)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_home)
+        setContentView(R.layout.activity_main)
 
 //        Get the edit text, all the text views, button
 //        mEtLocation = findViewById<View>(R.id.et_location) as EditText
@@ -39,12 +44,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 //        mBtSubmit!!.setOnClickListener(this)
 
         //Set the observer for the vanilla livedata object
-        mComboViewModel.userData.observe(this, liveDataObserver)
+        viewModel.userData.observe(this, liveDataObserver)
 
         //set another observer for the flow-converted-to-livedata object
         // cannot attach observers directly to flows, but the flow
         // has already been converted to a livedata object
-        mComboViewModel.allUserData.observe(this, flowObserver)
+        viewModel.allUserData.observe(this, flowObserver)
 
         //Get the recycler view.
 //        mRecyclerView = findViewById<View>(R.id.rv_Master) as RecyclerView
@@ -56,6 +61,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         //Set the layout manager
 //        val layoutManager = LinearLayoutManager(this)
 //        mRecyclerView!!.layoutManager = layoutManager
+        // Find the NavHostFragment using the fragment ID in your layout
+//        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+//
+//        // Set up the Navigation Component with the NavHostFragment
+//        val navController = navHostFragment.navController
+//        NavigationUI.setupActionBarWithNavController(this, navController)
+    }
+
+    // Override onOptionsItemSelected() to handle up/back button presses
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return NavigationUI.onNavDestinationSelected(item, navController)
+                || super.onOptionsItemSelected(item)
+    }
+
+    // Override onSupportNavigateUp() to handle up/back button presses
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp()
+                || super.onSupportNavigateUp()
     }
 
     //create an observer that watches the LiveData<WeatherData> object
@@ -92,6 +117,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun loadUserData(name: String?) {
         //pass the location in to the view model
-        mComboViewModel.setName(name!!)
+        viewModel.setName(name!!)
     }
 }

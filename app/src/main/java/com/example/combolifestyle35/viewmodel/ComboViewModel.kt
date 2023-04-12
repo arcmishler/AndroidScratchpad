@@ -1,6 +1,9 @@
 package com.example.combolifestyle35.viewmodel
 
 import androidx.lifecycle.*
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.example.combolifestyle35.R
 import com.example.combolifestyle35.model.UserData
 import com.example.combolifestyle35.model.UserRepository
 import com.example.combolifestyle35.model.UserTable
@@ -16,6 +19,14 @@ class ComboViewModel(repository: UserRepository) : ViewModel() {
     // Singleton UserRepo
     private var mUserRepository: UserRepository = repository
 
+    lateinit var navController: NavController
+
+    fun navigateToHome() {
+        navController.navigate(R.id.action_profileFragment_to_homeFragment)
+    }
+    fun navigateToProfile() {
+        navController.navigate(R.id.action_homeFragment_to_profileFragment)
+    }
     // Pass user's name to repository
     fun setName(name: String) {
         mUserRepository.setName(name)
