@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.fragment_home)
 
 //        Get the edit text, all the text views, button
 //        mEtLocation = findViewById<View>(R.id.et_location) as EditText
