@@ -10,28 +10,209 @@
     android:background="@color/lightMint"
     tools:context=".view.ProfileFragment">
 
-    <EditText
-        android:id="@+id/et_name"
+    <TextView
+        android:id="@+id/main_life"
+        style="@style/headerStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-82dp"
+        android:layout_marginLeft="32dp"
+        android:text="Lifestyle"
+        android:textColor="#8437FF"
+        android:textSize="85sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tv_name_hardcoded"
+        style="@style/ti_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="32dp"
-        android:hint="Name:"
-        android:textSize="20sp"
+        android:textColorHint="@color/purple_mid"
+        app:boxStrokeColor="@color/purple_mid"
+        app:hintTextAppearance="@style/label_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/ti_style"
+        app:startIconDrawable="@drawable/ic_start_text">
 
-    </EditText>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/name"
+            android:inputType="none"
+            android:labelFor="@id/tv_name_hardcoded"
+            android:textColor="@color/purple_mid"
+            tools:text="First and last" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_weight"
+        style="@style/buttonStyle2"
+        android:layout_width="170dp"
+        android:layout_height="62dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="24dp"
+        android:drawableEnd="@drawable/baseline_add_24"
+        android:onClick="showWeightPicker"
+        android:text="@string/weight"
+        android:textAppearance="@style/label_style"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_activity_hardcoded" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_age"
+        style="@style/buttonStyle2"
+        android:layout_width="160dp"
+        android:layout_height="61dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="24dp"
+        android:drawableEnd="@drawable/baseline_add_24"
+        android:onClick="openDatePicker"
+        android:text="Age    "
+        android:textAppearance="@style/label_style"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_loc_hardcoded" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tv_sex_hardcoded"
+        style="@style/dd_style"
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        app:boxStrokeColor="@color/purple_mid"
+        app:hintTextAppearance="@style/label_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_loc_hardcoded"
+        app:shapeAppearance="@style/ti_style">
+
+        <AutoCompleteTextView
+            android:id="@+id/tv_sex_data"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/purple_mid"
+            android:background="@null"
+            android:hint="@string/sex_label"
+            android:inputType="none"
+            android:labelFor="@id/tv_activity_hardcoded" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tv_activity_hardcoded"
+        style="@style/dd_style"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        app:boxStrokeColor="@color/purple_mid"
+        app:hintTextAppearance="@style/label_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_sex_hardcoded"
+        app:shapeAppearance="@style/ti_style">
+
+        <AutoCompleteTextView
+            android:id="@+id/tv_activityLevel_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="@string/activity_level"
+            android:inputType="none"
+            android:textColor="@color/purple_mid"
+            android:background="@null"
+            android:labelFor="@id/tv_activity_hardcoded" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <!--        Need to fix persistent state of sex dialog-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tv_loc_hardcoded"
+        style="@style/dd_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        app:boxStrokeColor="@color/purple_mid"
+        app:hintTextAppearance="@style/label_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_hardcoded"
+        app:shapeAppearance="@style/dd_style">
+
+        <AutoCompleteTextView
+            android:id="@+id/tv_loc_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/purple_mid"
+            android:hint="@string/location_label"
+            android:inputType="none"
+            android:background="@null"
+            android:labelFor="@id/tv_activity_hardcoded" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button_done"
-        android:layout_width="wrap_content"
+        android:id="@+id/button_submit"
+        style="@style/buttonStyle"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:text="Done"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_user" />
+        app:layout_constraintTop_toBottomOf="@id/button_weight" />
+
+    <Button
+        android:id="@+id/button_picture"
+        style="@style/buttonStyle2"
+        android:layout_width="170dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="32dp"
+        android:text="Edit Photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_activity_hardcoded" />
+
+    <!--    <EditText-->
+<!--        android:id="@+id/et_name"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        android:hint="Name:"-->
+<!--        android:textSize="20sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--    </EditText>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/button_done"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Done"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/et_name" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
