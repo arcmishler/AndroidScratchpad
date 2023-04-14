@@ -24,16 +24,16 @@ import java.util.*
 class ProfileFragment: Fragment(), DateSelected {
     private var buttonSubmit: Button? = null
     private var buttonCamera: Button? = null
+    private var buttonAge: Button? = null
+    private var buttonWeight: Button? = null
 
-    private var nameEt: EditText? = null
     private var etName: EditText? = null
     private var etAge: Int? = null
     private var etLoc: AutoCompleteTextView? = null
     private var etWeight: Int? = null
     private var etSex: AutoCompleteTextView? = null
     private var etActivityLvl: AutoCompleteTextView? = null
-    private var buttonAge: Button? = null
-    private var buttonWeight: Button? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for the Fragment
         val view: View = inflater.inflate(R.layout.fragment_profile, container, false)
@@ -56,11 +56,12 @@ class ProfileFragment: Fragment(), DateSelected {
         etActivityLvl= view.findViewById<View>(R.id.tv_activityLevel_data) as AutoCompleteTextView
         etActivityLvl!!.setAdapter(activityAdapter)
 
-        //Get the UI elements
+        //Get buttons
         buttonWeight = view.findViewById<View>(R.id.button_weight) as Button
         buttonAge = view.findViewById<View>(R.id.button_age) as Button
         buttonCamera = view.findViewById<View>(R.id.button_picture) as Button
 
+        // Get edit text
         etName = view.findViewById<View>(R.id.et_name) as EditText
 
         //Say that this class itself contains the listener.
@@ -86,34 +87,42 @@ class ProfileFragment: Fragment(), DateSelected {
         return view
     }
 
+    /**
+     * onClickers, Navigation, Observers, etc. go here.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val viewModel = ViewModelProvider(requireActivity())[ComboViewModel::class.java]
 
+        // Get the Navigation Component from the ViewModel.
         viewModel.navController = findNavController()
 
-        nameEt = view.findViewById(R.id.et_name) as EditText
+        etName = view.findViewById(R.id.et_name) as EditText
 
+        // When Submit button is pressed, go to home page.
         buttonSubmit = view.findViewById(R.id.button_submit) as Button
         buttonSubmit!!.setOnClickListener {
 
-            val name = nameEt!!.text.toString()
+            val name = etName!!.text.toString()
             viewModel.setName(name)
 
             viewModel.navigateToHome()
         }
 
+
+        // Show dialogs when respective buttons are pressed
         buttonAge!!.setOnClickListener {
             showDatePicker()
         }
-
         buttonWeight!!.setOnClickListener {
             showWeightPicker()
         }
-        // Set up any UI interactions, event listeners, or ViewModel observers
     }
 
+    /**
+     * Main content of the weight picker dialog.
+     */
     private fun showWeightPicker() {
         // Create a NumberPicker dialog
         val numberPicker = NumberPicker(requireContext())
@@ -141,6 +150,9 @@ class ProfileFragment: Fragment(), DateSelected {
         dialog.show()
     }
 
+    /**
+     * Brings up the weight dialog in the profile.
+     */
     private fun onWeightSelected(weight: Int) {
         etWeight = weight
         // Update the text on the weightButton with the selected weight or "Weight"
@@ -154,12 +166,19 @@ class ProfileFragment: Fragment(), DateSelected {
         }
 
     }
+
+    /**
+     * Allows the dialog to work as an inner class of the profile
+     * and show on-demand.
+     */
     private fun showDatePicker() {
         val datePickerFragment = DatePickerFragment(this)
         datePickerFragment.show(childFragmentManager, "datePicker")
     }
 
-    // Popup dialog for age
+    /**
+     * Main content of the age (date) dialog.
+     */
     public class DatePickerFragment(private val dateSelected: DateSelected) : DialogFragment(), android.app.DatePickerDialog.OnDateSetListener {
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
             val calendar : Calendar = Calendar.getInstance()
@@ -173,7 +192,10 @@ class ProfileFragment: Fragment(), DateSelected {
         }
 
     }
-    // Function that gets called when date is picked
+
+    /**
+     * Gets called when an age (date) is chosen.
+     */
     override fun receiveDate(year: Int, month: Int, dayOfMonth: Int) {
         val calendar = GregorianCalendar()
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -208,7 +230,10 @@ class ProfileFragment: Fragment(), DateSelected {
 //        builder.show()
 //    }
 }
-// For DatePickerDialog
+
+/**
+ * For the age picker dialog
+ */
 interface DateSelected {
     fun receiveDate(year: Int, month: Int, dayOfMonth: Int)
 

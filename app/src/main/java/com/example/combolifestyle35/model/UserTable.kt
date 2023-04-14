@@ -1,5 +1,6 @@
 package com.example.combolifestyle35.model
 
+import android.graphics.Bitmap
 import androidx.room.PrimaryKey
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -8,8 +9,15 @@ import androidx.room.Entity
 data class UserTable(
     @field:ColumnInfo(name = "name")
     @field:PrimaryKey
-    var name: String,
+    var name: String?,
+    @field:ColumnInfo(name = "location")
+    var loc: String?,
+    var age: Int?,
+    var sex: String?,
+    var activityLvl: String?,
+    var weight: Int?,
+    var photo: Bitmap?,
     @field:ColumnInfo(
         name = "userdata"
-    ) var userJson: String
+    ) var userJson: String?
 )

@@ -1,5 +1,6 @@
 package com.example.combolifestyle35.viewmodel
 
+import android.graphics.Bitmap
 import androidx.lifecycle.*
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -10,7 +11,7 @@ import com.example.combolifestyle35.model.UserTable
 
 class ComboViewModel(repository: UserRepository) : ViewModel() {
     // Connect LiveData to current Profile info
-    private val jsonUserData: LiveData<UserData> = repository.userData
+    private val _userData: LiveData<UserData> = repository.userData
 
     // This shows entire contents of database
     // Casts Flow to LiveData for Observers
@@ -26,17 +27,30 @@ class ComboViewModel(repository: UserRepository) : ViewModel() {
 //
     // Return data from LiveData obj
     val userData: LiveData<UserData>
-        get() = jsonUserData
+        get() = _userData
 
-    // ---- BASIC WORKING STUFF STARTING HERE ---
-    lateinit var navController: NavController
 
-    private val _name = MutableLiveData<String>()
-    val name: LiveData<String> get() = _name
+    fun setUserData(name: String, loc: String, age: Int, sex: String, activityLvl: String, weight: Int, photo: Bitmap) {
+        userData.value?.apply {
+            user.name = name
+            user.loc = loc
+            user.age = age
+            user.sex = sex
+            user.activityLvl = activityLvl
+            user.weight = weight
+            user.photo = photo
+        }
+        mUserRepository.setUserData(userData)
+    }
 
     fun setName(name: String) {
-        _name.value = name
+        _userData.value?.apply {
+            user.name = name
+        }
     }
+
+    // Navigation Component getter and methods
+    lateinit var navController: NavController
     fun navigateToHome() {
         navController.navigate(R.id.action_profileFragment_to_homeFragment)
     }

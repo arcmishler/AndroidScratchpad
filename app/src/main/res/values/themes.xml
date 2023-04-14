@@ -26,7 +26,7 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerRadius">35dp</item>
         <item name="android:textColor">@color/purple_mid</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="backgroundTint">@color/purple_light</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">0dp</item>
@@ -81,16 +81,6 @@
         <item name="cornerSize">4dp</item>
     </style>
 
-    <style name="tvProfileHardCode" >
-        <item name="android:textSize">16sp</item>
-        <item name="android:fontFamily">@font/mlato</item>
-        <item name="fontFamily">@font/mlato</item>
-        <item name="fontStyle">italic</item>'
-        <item name="android:textColor">@color/purple_dark</item>
-        <item name="android:textAlignment">textStart</item>
-        <item name="android:layout_margin">50dp</item>
-    </style>
-
     <style name="headerStyle" >
         <item name="android:textSize">28sp</item>
         <item name="android:textColor">#FF7C52</item>
@@ -133,6 +123,8 @@
         <item name="android:textColor">@color/purple_mid</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColorHint">@color/purple_mid</item>
+        <item name="fontFamily">@font/pangram_cr</item>
+        <item name="font">@font/pangram_cr</item>
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopRight">35dp</item>
         <item name="cornerSizeTopLeft">35dp</item>
@@ -144,10 +136,20 @@
         <item name="boxBackgroundColor">@color/purple_light</item>
     </style>
 
+<!--    <style name="date_picker_theme" parent="Theme.AppCompat.DayNight.Dialog">-->
+<!--        <item name="cornerRadius">35dp</item>-->
+<!--        <item name="android:colorButtonNormal">@color/bright_orange</item>-->
+<!--        <item name="android:colorBackgroundFloating">@color/bright_orange</item>-->
+<!--        <item name="android:layout_width">wrap_content</item>-->
+<!--        <item name="android:layout_height">wrap_content</item>-->
+<!--    </style>-->
+
     <style name="ti_style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/purple_mid</item>
         <item name="boxStrokeWidth">2dp</item>
         <item name="android:textColor">@color/purple_mid</item>
+        <item name="fontFamily">@font/pangram_cr</item>
+        <item name="font">@font/pangram_cr</item>
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopRight">35dp</item>
         <item name="cornerSizeTopLeft">35dp</item>

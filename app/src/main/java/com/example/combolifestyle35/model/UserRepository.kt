@@ -1,7 +1,9 @@
 package com.example.combolifestyle35.model
 
+import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData
 import androidx.annotation.WorkerThread
+import androidx.lifecycle.LiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -10,6 +12,17 @@ import kotlin.jvm.Synchronized
 
 
 class UserRepository private constructor(comboDao: ComboDao){
+    private var mName: String? = null
+    private var mLoc: String? = null
+    private var mAge: Int? = 0
+    private var mSex: String? = null
+    private var mActivityLvl: String? = null
+    private var mWeight: Int? = 0
+    private var mPhoto: Bitmap? = null
+
+    private var mJsonUser: String? = null
+    private var mUser: LiveData<UserData>? = null
+    private var mComboDao: ComboDao = comboDao
 
     // This LiveData object that is notified when we've fetched the user
     val userData = MutableLiveData<UserData>()
@@ -17,27 +30,38 @@ class UserRepository private constructor(comboDao: ComboDao){
     // This flow is triggered when any change happens to the database
     val allUserData: Flow<List<UserTable>> = comboDao.getAllUserData()
 
-    private var mName: String? = null
-    private var mUser: String? = null
-    private var mComboDao: ComboDao = comboDao
+    fun setUserData(user: LiveData<UserData>) {
+        // Cache the user info
+        mUser = user
+        mScope.launch(Dispatchers.IO) {
+            //fetchAndParseUserData()
 
-    fun setName(name: String) {
-        // Cache the name
-        mName = name
+            // After the suspend function returns, Update the View THEN insert into db
+        if(mJsonUser!=null)
+            // Populate live data object. But since this is happening in a background thread (the coroutine),
+            // we have to use postValue rather than setValue. Use setValue if update is on main thread
+            userData.postValue(JSONUserUtils.getUserData(mJsonUser))
 
-        // All database operations should be on a background thread
-        mScope.launch(Dispatchers.IO){
-            // Insert into database
-            // Updates flow
+            // insert into db. This will trigger a flow
+            // that updates a recyclerview. All db ops should happen
+            // on a background thread
             insert()
         }
     }
 
+    // Insert into db
     @WorkerThread
     suspend fun insert() {
-        if (mName != null) {
-            mComboDao.insert(UserTable(mName!!, mUser!!))
+        userData.value?.apply {
+            mName = user.name
+            mLoc = user.loc
+            mAge = user.age
+            mSex = user.sex
+            mActivityLvl = user.activityLvl
+            mWeight = user.weight
+            mPhoto = user.photo
         }
+            mComboDao.insert(UserTable(mName, mLoc, mAge, mSex, mActivityLvl, mWeight, mPhoto, mJsonUser))
     }
 
     // Make the repository singleton (static class)
