@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">LifestyleApp</string>
     <string name="activity_level">Activity Level</string>
     <string name="sex">Sex</string>
@@ -23,9 +24,14 @@
     <string name="sex_label">Sex</string>
     <string name="location_label">Location</string>
     <string name="age_label">Age</string>
-
     <string name="weight_data">%1$d lbs</string>
 
+    // BOTTOM BAR
+    <string name="bb_activity">Level: %1$d</string>
+    <string name="bb_calories">Cal: %1$d</string>
+    <string name="menu">Menu</string>
+
+    // ACTIVITIES
     <string-array name="activities">
         <item>Sedentary</item>
         <item>Lightly Active</item>
@@ -33,12 +39,14 @@
         <item>Very Active</item>
     </string-array>
 
+    // SEXES
     <string-array name="sexes">
         <item>Male</item>
         <item>Female</item>
         <item>Intersex</item>
     </string-array>
 
+    // LOCATIONS
     <string-array name="us_states">
         <item> AL, Alabama</item>
         <item> AK, Alaska</item>

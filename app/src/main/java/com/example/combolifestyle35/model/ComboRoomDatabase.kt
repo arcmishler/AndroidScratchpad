@@ -11,11 +11,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-@Database(entities = [UserTable::class], version = 1, exportSchema = false)
+@Database(entities = [UserTable::class], version = 2, exportSchema = false)
 abstract class ComboRoomDatabase : RoomDatabase() {
     abstract fun comboDao(): ComboDao
 
-    // Make the database singleton. Could in theory
+     // Make the database singleton.
     companion object {
         @Volatile
         private var mInstance: ComboRoomDatabase? = null
@@ -50,7 +50,7 @@ abstract class ComboRoomDatabase : RoomDatabase() {
         }
 
         suspend fun populateDbTask (comboDao: ComboDao) {
-            comboDao.insert(UserTable("Dummy_name", "Dummy_data"))
+            comboDao.insert(UserTable("Dummy_name", "d_loc", 0, "d_sex", "d_activity", 0, "dummy_Json"))
         }
     }
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    // default, non padded
+    <dimen name="nav_drawer_top_padding">0dp</dimen>
+    <dimen name="icon_size">200dp</dimen>
+
+    // Bottom Navigation Dimens
+    <dimen name="design_bottom_navigation_height" tools:override="true">56dp</dimen>
+    <dimen name="design_bottom_navigation_text_size" tools:override="true">12sp</dimen>
+    <dimen name="design_bottom_navigation_active_text_size" tools:override="true">12sp</dimen>
+</resources>

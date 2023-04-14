@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.ComboLifestyle35" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
+    <style name="Theme.ComboLifestyle35" parent="Theme.MaterialComponents.Light.NoActionBar"/>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    </style>
     <!-- Base application theme. -->
     <style name="buttonStyle">
         <item name="cornerFamily">rounded</item>
@@ -19,7 +22,7 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:elevation">4dp</item>
         <item name="android:outlineProvider">background</item>
-        <item name="android:background">@drawable/c_button1</item>
+        <item name="android:background">@drawable/button_corners</item>
     </style>
 
     <style name="buttonStyle2" parent="Widget.MaterialComponents.Button.OutlinedButton">
@@ -64,16 +67,13 @@
     </style>
 
     <style name="TextAppearance.App.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="fontFamily">@font/mlato</item>
-        <item name="android:fontFamily">@font/medlato</item>
-        <item name="fontStyle">italic</item>
-
+        <item name="fontFamily">@font/pangram_cr</item>
+        <item name="android:fontFamily">@font/pangram_cr</item>
     </style>
 
     <style name="TextAppearance.App.Caption" parent="TextAppearance.MaterialComponents.Caption">
-        <item name="fontFamily">@font/mlato</item>
-        <item name="android:fontFamily">@font/medlato</item>
-        <item name="fontStyle">italic</item>
+        <item name="fontFamily">@font/pangram_cr</item>
+        <item name="android:fontFamily">@font/pangram_cr</item>>
     </style>
 
     <style name="ShapeAppearance.App.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
@@ -172,5 +172,9 @@
         <item name="fontFamily">@font/pangram_cr</item>
         <item name="font">@font/pangram_cr</item>
         <item name="editTextStyle">@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox</item>
+    </style>
+
+    <style name="BottomNavigationView" parent="@style/Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:textSize">24sp</item>
     </style>
 </resources>

@@ -38,12 +38,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             viewModel.navigateToProfile()
         }
 
-        // NOT WORKING -- Use the ViewModel to update name textView with
-        // name entered in profile
-        nameTv = view.findViewById(R.id.name_tv) as TextView
-        viewModel.name.observe(viewLifecycleOwner, { name->
-            nameTv!!.text = name
-        })
+        // Use the ViewModel to update user information like this?
+//        viewModel.name.observe(viewLifecycleOwner, { user ->
+//            user!!.value = value
+//        })
     }
 
 }

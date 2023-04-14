@@ -6,21 +6,77 @@
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="128dp"
+        android:background="@color/purple_dull"
+        android:fitsSystemWindows="true"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_top_menu"
+        app:titleTextAppearance="@style/headerStyle"
+        app:titleTextColor="@color/purple_dull_light" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="759dp"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph"
-    />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:navGraph="@navigation/nav_graph" />
 
-    <Button
-        android:id="@+id/button_submit"
+    <TextView
+        android:id="@+id/toolbar_life_laugh"
+        style="@style/headerStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:text="Button"
+        android:layout_gravity="center"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="38dp"
+        android:elevation="6dp"
+        android:text="Live Laugh"
+        android:textColor="@color/bright_orange"
+        android:textSize="35sp"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+    <TextView
+        android:id="@+id/header_purple"
+        style="@style/headerStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="71dp"
+        android:text="Lifestyle"
+        android:textColor="#8437FF"
+        android:textSize="86sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/toolbar_life"
+        style="@style/headerStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="65dp"
+        android:text="Lifestyle"
+        android:textSize="86sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

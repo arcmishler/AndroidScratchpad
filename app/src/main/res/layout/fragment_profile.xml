@@ -10,20 +10,6 @@
     android:background="@color/lightMint"
     tools:context=".view.ProfileFragment">
 
-    <TextView
-        android:id="@+id/main_life"
-        style="@style/headerStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-82dp"
-        android:layout_marginLeft="32dp"
-        android:text="Lifestyle"
-        android:textColor="#8437FF"
-        android:textSize="85sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tv_name_hardcoded"
         style="@style/ti_style"

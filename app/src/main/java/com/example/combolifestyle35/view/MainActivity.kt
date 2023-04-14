@@ -1,27 +1,32 @@
 package com.example.combolifestyle35.view
 
+
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.combolifestyle35.viewmodel.ComboViewModel
 import com.example.combolifestyle35.R
+import com.example.combolifestyle35.model.ComboApplication
 import com.example.combolifestyle35.model.UserData
 import com.example.combolifestyle35.model.UserTable
-import com.example.combolifestyle35.model.ComboApplication
+import com.example.combolifestyle35.viewmodel.ComboViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var mBtSubmit: Button? = null
     private var mRecyclerView: RecyclerView? = null
     private var mAdapter: RecyclerView.Adapter<*>? = null
+    private lateinit var bottomBar: BottomNavigationView
     // Initialize the view model here. One per activity.
     // While initializing, we'll also inject the repository.
     // However, standard view model constructor only takes a context to
@@ -33,6 +38,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_main)
 
 //        Get the edit text, all the text views, button
@@ -42,6 +48,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 //        mTvHum = findViewById<View>(R.id.tv_humidity) as TextView
 //        mBtSubmit = findViewById<View>(R.id.button_submit) as Button
 //        mBtSubmit!!.setOnClickListener(this)
+
 
         //Set the observer for the vanilla livedata object
         viewModel.userData.observe(this, liveDataObserver)
@@ -65,8 +72,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 //        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 //
 //        // Set up the Navigation Component with the NavHostFragment
-//        val navController = navHostFragment.navController
-//        NavigationUI.setupActionBarWithNavController(this, navController)
     }
 
     // Override onOptionsItemSelected() to handle up/back button presses

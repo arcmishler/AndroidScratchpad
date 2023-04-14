@@ -11,8 +11,8 @@ import kotlinx.coroutines.launch
 import kotlin.jvm.Synchronized
 
 
-class UserRepository private constructor(comboDao: ComboDao){
-    private var mName: String? = null
+class UserRepository private constructor(comboDao: ComboDao) {
+    private lateinit var mName: String
     private var mLoc: String? = null
     private var mAge: Int? = 0
     private var mSex: String? = null
@@ -37,10 +37,10 @@ class UserRepository private constructor(comboDao: ComboDao){
             //fetchAndParseUserData()
 
             // After the suspend function returns, Update the View THEN insert into db
-        if(mJsonUser!=null)
+            if (mJsonUser != null)
             // Populate live data object. But since this is happening in a background thread (the coroutine),
             // we have to use postValue rather than setValue. Use setValue if update is on main thread
-            userData.postValue(JSONUserUtils.getUserData(mJsonUser))
+                userData.postValue(JSONUserUtils.getUserData(mJsonUser))
 
             // insert into db. This will trigger a flow
             // that updates a recyclerview. All db ops should happen
@@ -53,33 +53,33 @@ class UserRepository private constructor(comboDao: ComboDao){
     @WorkerThread
     suspend fun insert() {
         userData.value?.apply {
-            mName = user.name
+            mName = user.name.toString()
             mLoc = user.loc
             mAge = user.age
             mSex = user.sex
             mActivityLvl = user.activityLvl
             mWeight = user.weight
-            mPhoto = user.photo
+            // TODO save user photo
         }
-            mComboDao.insert(UserTable(mName, mLoc, mAge, mSex, mActivityLvl, mWeight, mPhoto, mJsonUser))
+        mComboDao.insert(UserTable(mName, mLoc, mAge, mSex, mActivityLvl, mWeight, mJsonUser))
     }
 
     // Make the repository singleton (static class)
     companion object {
         private var mInstance: UserRepository? = null
         private lateinit var mScope: CoroutineScope
+
         @Synchronized
-        fun getInstance(comboDao: ComboDao,
-                        scope: CoroutineScope
+        fun getInstance(
+            comboDao: ComboDao,
+            scope: CoroutineScope
         ): UserRepository {
             mScope = scope
-            return mInstance ?: synchronized(this){
+            return mInstance ?: synchronized(this) {
                 val instance = UserRepository(comboDao)
                 mInstance = instance
                 instance
             }
         }
     }
-
-
 }
