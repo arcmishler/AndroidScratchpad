@@ -3,9 +3,9 @@
 
     <item
         android:drawable="@drawable/ic_bmr"
-        android:width="175dp"
-        android:height="200dp"
-        android:padding="10dp"
+        android:width="150dp"
+        android:height="@dimen/icon_size"
+        android:padding="20dp"
         />
 
 </layer-list >

@@ -1,17 +1,13 @@
 package com.example.combolifestyle35.view
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
-import android.graphics.Bitmap
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -26,17 +22,18 @@ class ProfileFragment: Fragment(), DateSelected {
     private var buttonCamera: Button? = null
     private var buttonAge: Button? = null
     private var buttonWeight: Button? = null
-
+    private var buttonHeight: Button? = null
     private var etName: EditText? = null
     private var etAge: Int? = null
     private var etLoc: AutoCompleteTextView? = null
     private var etWeight: Int? = null
+    private var etHeight: Int? = null
     private var etSex: AutoCompleteTextView? = null
     private var etActivityLvl: AutoCompleteTextView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for the Fragment
-        val view: View = inflater.inflate(R.layout.fragment_profile, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_form, container, false)
 
         //Set up UI components
         val sexes = resources.getStringArray(R.array.sexes)
@@ -57,6 +54,7 @@ class ProfileFragment: Fragment(), DateSelected {
         etActivityLvl!!.setAdapter(activityAdapter)
 
         //Get buttons
+        buttonHeight = view.findViewById<View>(R.id.button_height) as Button
         buttonWeight = view.findViewById<View>(R.id.button_weight) as Button
         buttonAge = view.findViewById<View>(R.id.button_age) as Button
         buttonCamera = view.findViewById<View>(R.id.button_picture) as Button
@@ -118,6 +116,9 @@ class ProfileFragment: Fragment(), DateSelected {
         buttonWeight!!.setOnClickListener {
             showWeightPicker()
         }
+        buttonHeight!!.setOnClickListener {
+            showHeightPicker()
+        }
     }
 
     /**
@@ -130,7 +131,7 @@ class ProfileFragment: Fragment(), DateSelected {
         // Set properties for the NumberPicker
         numberPicker.minValue = 1
         numberPicker.maxValue = 999
-        numberPicker.value = 100
+        numberPicker.value = 150
 
         // Create an AlertDialog with the NumberPicker as its view
         val dialog = AlertDialog.Builder(requireContext())
@@ -165,6 +166,53 @@ class ProfileFragment: Fragment(), DateSelected {
             weightButton?.setText(R.string.weight)
         }
 
+    }
+
+    /**
+     * Brings up the height dialog in the profile.
+     */
+    private fun onHeightSelected(height: Int) {
+        etHeight = height
+        // Update the text on the weightButton with the selected weight or "Weight"
+        val heightButton = view?.findViewById<Button>(R.id.button_weight)
+        if (height > 0) {
+            // If a weight is selected, update the text with the weight value
+            heightButton?.text = getString(R.string.height_data, height)
+        } else {
+            // If no weight is selected, show "Weight" as the default text
+            heightButton?.setText(R.string.height)
+        }
+
+    }
+
+    /**
+     * Main content of the height picker dialog.
+     */
+    private fun showHeightPicker() {
+        // Create a NumberPicker dialog
+        val numberPicker = NumberPicker(requireContext())
+
+        // Set properties for the NumberPicker
+        numberPicker.minValue = 1
+        numberPicker.maxValue = 100
+        numberPicker.value = 65
+
+        // Create an AlertDialog with the NumberPicker as its view
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(numberPicker)
+            .setTitle("Select Height")
+            .setPositiveButton("OK") { _, _ ->
+                // Get the selected value from the NumberPicker
+                val height = numberPicker.value
+
+                // Call a method in FormFragment with the selected weight
+                onWeightSelected(height)
+            }
+            .setNegativeButton("Cancel", null)
+            .create()
+
+        // Show the dialog
+        dialog.show()
     }
 
     /**

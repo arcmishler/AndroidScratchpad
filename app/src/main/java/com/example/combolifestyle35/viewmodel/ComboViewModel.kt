@@ -52,10 +52,10 @@ class ComboViewModel(repository: UserRepository) : ViewModel() {
     // Navigation Component getter and methods
     lateinit var navController: NavController
     fun navigateToHome() {
-        navController.navigate(R.id.action_profileFragment_to_homeFragment)
+        navController.navigate(R.id.action_formFragment_to_homeFragment)
     }
-    fun navigateToProfile() {
-        navController.navigate(R.id.action_homeFragment_to_profileFragment)
+    fun navigateToForm() {
+        navController.navigate(R.id.action_homeFragment_to_formFragment)
     }
 
     // This factory class allows us to define custom constructors for the view model

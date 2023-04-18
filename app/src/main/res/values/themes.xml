@@ -29,7 +29,7 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerRadius">35dp</item>
         <item name="android:textColor">@color/purple_mid</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="backgroundTint">@color/purple_light</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">0dp</item>
@@ -168,7 +168,7 @@
         <item name="colorOnSurface">@color/bright_orange</item>    //Normal color
         <item name="colorError">@color/bright_orange</item>        //Error color
         <item name="hintTextColor">@color/purple_mid</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="fontFamily">@font/pangram_cr</item>
         <item name="font">@font/pangram_cr</item>
         <item name="editTextStyle">@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox</item>

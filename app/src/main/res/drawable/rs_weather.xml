@@ -3,7 +3,7 @@
 
     <item
         android:drawable="@drawable/ic_weather"
-        android:width="@dimen/icon_size"
+        android:width="150dp"
         android:height="@dimen/icon_size"
         />
 

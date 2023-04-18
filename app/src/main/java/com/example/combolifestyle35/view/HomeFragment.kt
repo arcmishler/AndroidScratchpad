@@ -35,7 +35,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.navController = findNavController()
         buttonProfile = view.findViewById(R.id.button_profile) as Button
         buttonProfile!!.setOnClickListener {
-            viewModel.navigateToProfile()
+            viewModel.navigateToForm()
         }
 
         // Use the ViewModel to update user information like this?

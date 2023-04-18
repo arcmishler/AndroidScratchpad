@@ -11,16 +11,16 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            android:id="@+id/action_homeFragment_to_formFragment"
+            app:destination="@id/formFragment" />
     </fragment>
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/formFragment"
         android:name="com.example.combolifestyle35.view.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        android:label="fragment_form"
+        tools:layout="@layout/fragment_form">
         <action
-            android:id="@+id/action_profileFragment_to_homeFragment"
+            android:id="@+id/action_formFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>
